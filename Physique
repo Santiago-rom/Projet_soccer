@@ -1,0 +1,53 @@
+math.import
+#Variables constantes
+x_centre_but = 0
+y_but = 52.5
+x_poteau1 = 3.66
+x_poteau2 = -3.66
+m_ballon = 0.430
+g = 9.81
+t_contact = 0.010
+rayon_ballon = 0.11
+dt = 0.01 #La simulation calcule la position et la vitesse du ballon toutes les 0,01 s
+
+#Variables à déterminer
+force_impact =
+position_x =
+position_y =
+
+#Phase 1: déterminer la vitesse initiale
+v0 = (force_impact*t_contact)/m_ballon
+
+# Calcul des composantes de vitesse
+angle_horizontale = math.atan((position_x-x_but)/(position_y-y_but))
+angle_verticale = 
+teta = math.radians(angle_horizontale)
+alpha = math.radians(angle_verticale)
+
+vx = v0 * math.cos(teta)*math.cos(alpha)
+vy = v0 * math.cos(teta)*math.sin(alpha)
+vz = v0 * math.sin(teta)
+
+#Forces à inclure
+fg = 
+
+# Rotation (rad/s)
+omega_x = 
+omega_y = 0
+omega_z =
+
+while y = 52.5:
+ # Effet Magnus (produit vectoriel)
+    ax = (S/m) * (omega_y*vz - omega_z*vy)
+    ay = (S/m) * (omega_z*vx - omega_x*vz)
+    az = -g + (S/m) * (omega_x*vy - omega_y*vx)
+    
+    # Mise à jour vitesses
+    vx += ax * dt
+    vy += ay * dt
+    vz += az * dt
+    
+    # Mise à jour positions
+    x += vx * dt
+    y += vy * dt
+    z += vz * dt
