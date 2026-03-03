@@ -64,18 +64,21 @@ vz = v0 * math.sin(teta)
 
 # Rotation (rad/s)
 effet_magnus = input("Voulez-vous un effet magnus élevé, moyen ou faible?(E/M/F)")
-if effet_magus = "E":
+effet_magnus1 = effet_magnus.upper()
+if effet_magnus1 = "E":
    omega_x = 50
    omega_y = 10
    omega_z = 100
-elif effet_magnus = "M":
+elif effet_magnus1 = "M":
    omega_x = 20
    omega_y = 5
    omega_z = 60
-elif effet_magnus = "F":
+elif effet_magnus1 = "F":
    omega_x = 10
    omega_y = 0
    omega_z = 20
+else:
+   print("Erreur! Veuillez recommencer en insérant une des lettres")
 
 #Produit vectoriel
 omegas = np.array([omega_x,omega_y,omega_z])
