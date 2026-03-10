@@ -1,4 +1,4 @@
-math.import
+import math
 import numpy as np
 #Variables constantes
 x_centre_but = 0
