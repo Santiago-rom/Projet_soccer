@@ -54,7 +54,7 @@ canvas.bind("<Button-1>", click)
 root.mainloop()
 
 # Calcul des composantes de vitesse
-angle_horizontale = math.atan((position_x-x_but)/(position_y-y_but))
+angle_horizontale = math.atan((position_x)/(position_y))
 teta = math.radians(angle_horizontale)
 alpha = math.radians(angle_verticale)
 
