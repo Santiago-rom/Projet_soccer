@@ -1,4 +1,4 @@
-# Adam Daki
+
 import math
 
 def simuler_tir(force_impact,position_x,position_y):
