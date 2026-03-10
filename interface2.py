@@ -1,8 +1,6 @@
 
 import matplotlib.pyplot as plt
 
-
-
 #Creer la fonction qui va afficher le résultat sous forme de graphique avec des paramétres y et z
 def afficher_resultat(y,z , verdict , force  ):
 

@@ -2,7 +2,7 @@ math.import
 #Variables constantes
 x_centre_but = 0
 y_but = 52.5
-x_poteau1 = 3.66
+x_poteau1 = 3.66  i
 x_poteau2 = -3.66
 m_ballon = 0.430
 g = 9.81
