@@ -54,7 +54,7 @@ canvas_hauteur = 450
 def clic_terrain(event):
     global position_x, position_y, position_z
 
-    # conversion du canvas vers les coordonn√©es du terrain (chatgpt)
+    # conversion du canvas vers les coordonnées du terrain (chatgpt)
 
     position_x = (event.x / canvas_largeur) * largeur_terrain - 34
 
@@ -167,7 +167,7 @@ def valider_donnees():
 
     zone_resultat.delete("1.0", tk.END)
 
-    zone_resultat.insert(tk.END, "Variables d'entr√©e pour les calculs\n\n")
+    zone_resultat.insert(tk.END, "Variables d'entrée pour les calculs\n\n")
 
     zone_resultat.insert(tk.END, "force_impact = " + str(force_impact) + "\n")
 
@@ -316,7 +316,7 @@ texte_angle.pack(pady=10)
 
 # bouton
 
-bouton_valider = tk.Button(frame_droite, text="Valider les donn√©es",
+bouton_valider = tk.Button(frame_droite, text="Valider les données",
 
                            font=("Arial", 13, "bold"), bg="#4CAF50", fg="white",
 
