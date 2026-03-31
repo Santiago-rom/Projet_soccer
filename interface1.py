@@ -22,7 +22,7 @@ t_contact = 0.010
 
 rayon_ballon = 0.11
 
-# variables √† d√©terminer
+# variables √† déterminer
 
 force_impact = 0
 
@@ -222,27 +222,28 @@ canvas_terrain = tk.Canvas(frame_gauche, width=canvas_largeur, height=canvas_hau
 
 canvas_terrain.pack()
 
-# dessin du terrain
+# dessin du demi-terrain
 
+# contour du demi-terrain
 canvas_terrain.create_rectangle(20, 20, 680, 430, outline="white", width=3)
 
-canvas_terrain.create_line(350, 20, 350, 430, fill="white", width=2)
+# ligne du haut (ligne de but)
+canvas_terrain.create_line(20, 20, 680, 20, fill="white", width=3)
 
-canvas_terrain.create_oval(290, 165, 410, 285, outline="white", width=2)
+# surface de réparation
+canvas_terrain.create_rectangle(200, 20, 500, 140, outline="white", width=2)
 
-canvas_terrain.create_oval(345, 220, 355, 230, fill="white", outline="white")
+# petite surface
+canvas_terrain.create_rectangle(270, 20, 430, 80, outline="white", width=2)
 
-# but en haut
+# point de penalty
+canvas_terrain.create_oval(345, 100, 355, 110, fill="white", outline="white")
 
-canvas_terrain.create_rectangle(310, 10, 390, 20, outline="yellow", width=3)
+# arc de cercle du penalty
+canvas_terrain.create_arc(290, 80, 410, 200, start=180, extent=180, outline="white", width=2)
 
-canvas_terrain.bind("<Button-1>", clic_terrain)
-
-texte_position = tk.Label(frame_gauche, text="Position choisie : aucune",
-
-                          font=("Arial", 12), bg="#1f1f1f", fg="white")
-
-texte_position.pack(pady=10)
+# but
+canvas_terrain.create_rectangle(310, 5, 390, 20, outline="yellow", width=3)
 
 # partie droite
 
