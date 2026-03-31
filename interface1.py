@@ -163,36 +163,18 @@ def valider_donnees():
 
         return
 
-        # affichage des valeurs (chatgpt)
+    # affichage des valeurs (chatgt)
 
     zone_resultat.delete("1.0", tk.END)
 
-    zone_resultat.insert(tk.END, "Variables d'entrée pour les calculs\n\n")
+    zone_resultat.insert(tk.END, "=== VARIABLES D'ENTRÉE ===\n\n")
 
-    zone_resultat.insert(tk.END, "force_impact = " + str(force_impact) + "\n")
-
-    zone_resultat.insert(tk.END, "position_x = " + str(position_x) + "\n")
-
-    zone_resultat.insert(tk.END, "position_y = " + str(position_y) + "\n")
-
-    zone_resultat.insert(tk.END, "position_z = " + str(position_z) + "\n")
-
-    zone_resultat.insert(tk.END, "angle_verticale = " + str(angle_verticale) + "\n")
-
-    zone_resultat.insert(tk.END, "effet_magnus1 = '" + str(effet_magnus1) + "'\n")
-
-    print("force_impact =", force_impact)
-
-    print("position_x =", position_x)
-
-    print("position_y =", position_y)
-
-    print("position_z =", position_z)
-
-    print("angle_verticale =", angle_verticale)
-
-    print("effet_magnus1 =", effet_magnus1)
-
+    zone_resultat.insert(tk.END, f"{'Force impact':<20} : {force_impact} N\n")
+    zone_resultat.insert(tk.END, f"{'Position X':<20} : {round(position_x, 2)} m\n")
+    zone_resultat.insert(tk.END, f"{'Position Y':<20} : {round(position_y, 2)} m\n")
+    zone_resultat.insert(tk.END, f"{'Position Z':<20} : {position_z} m\n")
+    zone_resultat.insert(tk.END, f"{'Angle vertical':<20} : {round(angle_verticale, 2)} °\n")
+    zone_resultat.insert(tk.END, f"{'Effet Magnus':<20} : {effet_magnus1}\n")
 
 # fenetre principale
 
