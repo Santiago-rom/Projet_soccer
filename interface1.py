@@ -114,7 +114,7 @@ def clic_ballon(event):
 
     texte_angle.config(
 
-        text="Angle vertical choisi : " + str(round(angle_verticale, 2)) + "¬∞"
+        text="Angle vertical choisi : " + str(round(angle_verticale, 2)) + "°"
 
     )
 
@@ -130,19 +130,19 @@ def valider_donnees():
 
     except:
 
-        messagebox.showerror("Erreur", "Veuillez entrer une valeur num√©rique pour la force.")
+        messagebox.showerror("Erreur", "Veuillez entrer une valeur numérique pour la force.")
 
         return
 
     if force_impact > 1500:
         messagebox.showerror("Erreur",
-                             "Votre tir est trop fort. Recommencez. Je vous sugg√®re une force entre 1000 et 1500 N.")
+                             "Votre tir est trop fort. Recommencez. Je vous suggère une force entre 1000 et 1500 N.")
 
         return
 
     if force_impact < 1000:
         messagebox.showerror("Erreur",
-                             "Votre tir est trop faible. Recommencez. Je vous sugg√®re une force entre 1000 et 1500 N.")
+                             "Votre tir est trop faible. Recommencez. Je vous suggère une force entre 1000 et 1500 N.")
 
         return
 
@@ -194,7 +194,7 @@ def valider_donnees():
     print("effet_magnus1 =", effet_magnus1)
 
 
-# fen√™tre principale
+# fenetre principale
 
 root = tk.Tk()
 
@@ -252,7 +252,7 @@ frame_droite.pack(side="right", fill="y", padx=20, pady=20)
 
 frame_droite.pack_propagate(False)
 
-titre_donnees = tk.Label(frame_droite, text="Donn√©es du tir",
+titre_donnees = tk.Label(frame_droite, text="Données du tir",
 
                          font=("Arial", 16, "bold"), bg="#2a2a2a", fg="white")
 
@@ -324,7 +324,7 @@ bouton_valider = tk.Button(frame_droite, text="Valider les donn√©es",
 
 bouton_valider.pack(fill="x", padx=20, pady=15)
 
-# zone r√©sultat
+# zone résultat
 
 zone_resultat = tk.Text(frame_droite, width=35, height=12, font=("Consolas", 10))
 
