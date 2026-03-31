@@ -244,6 +244,13 @@ canvas_terrain.create_arc(290, 80, 410, 200, start=180, extent=180, outline="whi
 
 # but
 canvas_terrain.create_rectangle(310, 5, 390, 20, outline="yellow", width=3)
+# Pour cliquer sur le terrain
+canvas_terrain.bind("<Button-1>", clic_terrain)
+
+texte_position = tk.Label(frame_gauche, text="Position choisie : aucune",
+                          font=("Arial", 12), bg="#1f1f1f", fg="white")
+
+texte_position.pack(pady=10)
 
 # partie droite
 
