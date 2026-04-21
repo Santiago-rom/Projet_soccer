@@ -1,0 +1,97 @@
+import matplotlib.pyplot as plt 
+ 
+# constantes 
+g = 9.81 
+m = 0.43 
+s = 0.0004  # intensité effet Magnus 
+ 
+# paramètres 
+v0 = 25 
+angle = np.radians(20) 
+omega = 60  # rotation 
+ 
+dt = 0.01 
+t_max = 5 
+ 
+# ----------------------------- 
+# Sans effet magnus 
+vx = v0 * np.cos(angle) 
+vy = 0 
+vz = v0 * np.sin(angle) 
+ 
+x, y, z = 0, 0, 0 
+ 
+X_sans, Y_sans = [], [] 
+ 
+t = 0 
+ 
+while t < t_max: #itération 
+    ax = 0 
+    ay = 0 
+    az = -g 
+ 
+    vx += ax * dt 
+    vy += ay * dt 
+    vz += az * dt 
+ 
+    x += vx * dt 
+    y += vy * dt 
+    z += vz * dt 
+ 
+    if z >= 0: 
+        X_sans.append(x) 
+        Y_sans.append(y) 
+ 
+    t += dt 
+ 
+# ----------------------------- 
+# AVEC EFFET MAGNUS (générée par Chatgpt) 
+# ----------------------------- 
+vx = v0 * np.cos(angle) 
+vy = 0 
+vz = v0 * np.sin(angle) 
+ 
+x, y, z = 0, 0, 0 
+ 
+X_avec, Y_avec = [], [] 
+ 
+t = 0 
+while t < t_max: 
+ 
+    v = np.sqrt(vx**2 + vy**2) 
+ 
+    # effet Magnus → déviation latérale 
+    ay = s * v * omega / m 
+ 
+    ax = 0 
+    az = -g 
+ 
+    vx += ax * dt 
+    vy += ay * dt 
+    vz += az * dt 
+ 
+    x += vx * dt 
+    y += vy * dt 
+    z += vz * dt 
+ 
+    if z >= 0: 
+        X_avec.append(x) 
+        Y_avec.append(y) 
+ 
+    t += dt 
+ 
+# Graphique (vue du dessus) 
+plt.figure(figsize=(8,5)) 
+ 
+plt.plot(X_sans, Y_sans, label="Sans effet Magnus", color="black") 
+plt.plot(X_avec, Y_avec, label="Avec effet Magnus", color="red") 
+ 
+plt.xlabel("Distance vers le but (x)") 
+plt.ylabel("Déviation latérale (y)") 
+plt.title("Trajectoire du ballon (vue du dessus)") 
+ 
+plt.legend() 
+plt.grid() 
+ 
+plt.show() 
+ 
