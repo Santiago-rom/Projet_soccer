@@ -69,31 +69,37 @@ def clic_terrain(event):
 
 # clic sur le ballon pour angle vertical
 def clic_ballon(event):
-    global angle_verticale
+    global angle_verticale, spin_choisi
 
     xc = 100
     yc = 100
 
+    # 1. NETTOYAGE : Supprime l'ancien point rouge s'il existe
+    canvas_ballon.delete("point_impact")
+
+    # 2. CALCULS
     dx = event.x - xc
     dy = yc - event.y
 
-    angle_verticale = math.degrees(math.atan2(dy, dx))
+    # Angle vertical (on garde abs(dx) pour que l'angle soit cohérent même sur les bords)
+    angle_verticale = math.degrees(math.atan2(dy, abs(dx)))
 
-    canvas_ballon.delete("point_impact")
+    # Spin latéral (Gauche/Droite)
+    spin_choisi = -(event.x - xc) / 10
 
+    # 3. DESSIN : On ajoute le tag "point_impact" pour qu'il soit supprimable au prochain clic
     canvas_ballon.create_oval(
-        event.x - 4, event.y - 4, event.x + 4, event.y + 4,
-        fill="red", outline="black", tags="point_impact"
+        event.x - 4, event.y - 4,
+        event.x + 4, event.y + 4,
+        fill="red",
+        outline="black",
+        tags="point_impact"  # <--- C'EST CETTE LIGNE QUI MANQUAIT
     )
 
-    texte_angle.config(
-        text="Angle vertical choisi : " + str(round(angle_verticale, 2)) + "°"
-    )
-
-
+    texte_angle.config(text=f"Angle: {round(angle_verticale, 2)}° | Spin: {round(spin_choisi, 2)}")
 # bouton valider
 def valider_donnees():
-    global force_impact, effet_magnus1
+    global force_impact, angle_verticale, position_x, position_y,spin_choisi
 
     try:
         force_impact = float(entree_force.get())
@@ -101,25 +107,16 @@ def valider_donnees():
         messagebox.showerror("Erreur", "Veuillez entrer une valeur numérique pour la force.")
         return
 
-    if force_impact > 1500:
-        messagebox.showerror(
-            "Erreur",
-            "Votre tir est trop fort. Recommencez. Je vous suggère une force entre 1000 et 1500 N."
-        )
-        return
+    from calculs import simuler_tir
+    liste_x, liste_y, liste_z, verdict = simuler_tir(
+        force_impact,
+        position_x,
+        position_y,
+        angle_verticale,
+        spin_choisi,
 
-    if force_impact < 1000:
-        messagebox.showerror(
-            "Erreur",
-            "Votre tir est trop faible. Recommencez. Je vous suggère une force entre 1000 et 1500 N."
-        )
-        return
-
-    effet_magnus1 = variable_effet.get()
-
-    if effet_magnus1 != "E" and effet_magnus1 != "M" and effet_magnus1 != "F":
-        messagebox.showerror("Erreur", "Veuillez choisir un effet magnus valide.")
-        return
+    )
+    # On envoie le spin positif ou négatif ici
 
     if position_x == 0 and position_y == 0:
         messagebox.showerror("Erreur", "Choisir votre position sur le terrain.")
@@ -129,22 +126,26 @@ def valider_donnees():
         messagebox.showerror("Erreur", "Cliquez sur le ballon pour choisir l'angle vertical.")
         return
 
-    # affichage des valeurs
+    # Affichage des valeurs dans la zone de texte
     zone_resultat.delete("1.0", tk.END)
-
     zone_resultat.insert(tk.END, "=== VARIABLES D'ENTRÉE ===\n\n")
-    zone_resultat.insert(tk.END, f"{'Force impact':<20} : {force_impact} N\n")
-    zone_resultat.insert(tk.END, f"{'Position X':<20} : {round(position_x, 2)} m\n")
-    zone_resultat.insert(tk.END, f"{'Position Y':<20} : {round(position_y, 2)} m\n")
-    zone_resultat.insert(tk.END, f"{'Position Z':<20} : {position_z} m\n")
-    zone_resultat.insert(tk.END, f"{'Angle vertical':<20} : {round(angle_verticale, 2)} °\n")
-    zone_resultat.insert(tk.END, f"{'Effet Magnus':<20} : {effet_magnus1}\n")
+    zone_resultat.insert(tk.END, f"Force: {force_impact} N\n")
+    zone_resultat.insert(tk.END, f"Angle Vert: {round(angle_verticale, 2)}°\n")
+    zone_resultat.insert(tk.END, f"Effet: {variable_effet.get()} (Spin: {spin_choisi})\n")
 
+    # --- CORRECTION DE L'APPEL ---
     from calculs import simuler_tir
-    liste_x, liste_y, liste_z, verdict = simuler_tir(force_impact, position_x, position_y)
+    # On envoie maintenant l'angle_verticale et le spin_value
+    # Note : assure-toi que ta fonction simuler_tir accepte ces arguments
+    liste_x, liste_y, liste_z, verdict = simuler_tir(
+        force_impact,
+        position_x,
+        position_y,
+        angle_verticale,
+        spin_choisi,
+    )
 
     afficher_resultat(liste_x, liste_y, verdict, force_impact)
-
 
 # fenêtre principale
 root = tk.Tk()
