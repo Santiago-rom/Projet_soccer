@@ -176,27 +176,32 @@ canvas_terrain = tk.Canvas(
 canvas_terrain.pack()
 
 # dessin du demi-terrain
+def sx(x):
+    return x / 700 * canvas_largeur
+
+def sy(y):
+    return y / 450 * canvas_hauteur
 
 # contour du demi-terrain
-canvas_terrain.create_rectangle(20, 20, 680, 430, outline="white", width=3)
+canvas_terrain.create_rectangle(sx(20), sy(20), sx(680), sy(430), outline="white", width=3)
 
-# ligne du haut (ligne de but)
-canvas_terrain.create_line(20, 20, 680, 20, fill="white", width=3)
+# ligne du haut
+canvas_terrain.create_line(sx(20), sy(20), sx(680), sy(20), fill="white", width=3)
 
 # surface de réparation
-canvas_terrain.create_rectangle(200, 20, 500, 140, outline="white", width=2)
+canvas_terrain.create_rectangle(sx(200), sy(20), sx(500), sy(140), outline="white", width=2)
 
 # petite surface
-canvas_terrain.create_rectangle(270, 20, 430, 80, outline="white", width=2)
+canvas_terrain.create_rectangle(sx(270), sy(20), sx(430), sy(80), outline="white", width=2)
 
 # point de penalty
-canvas_terrain.create_oval(345, 100, 355, 110, fill="white", outline="white")
+canvas_terrain.create_oval(sx(345), sy(100), sx(355), sy(110), fill="white", outline="white")
 
 # arc de cercle du penalty
-canvas_terrain.create_arc(290, 80, 410, 200, start=180, extent=180, outline="white", width=2)
+canvas_terrain.create_arc(sx(290), sy(80), sx(410), sy(200), start=180, extent=180, outline="white", width=2)
 
 # but
-canvas_terrain.create_rectangle(310, 5, 390, 20, outline="yellow", width=3)
+canvas_terrain.create_rectangle(sx(310), sy(5), sx(390), sy(20), outline="yellow", width=3)
 
 # cliquer sur le terrain
 canvas_terrain.bind("<Button-1>", clic_terrain)
