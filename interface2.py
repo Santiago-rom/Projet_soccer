@@ -1,37 +1,52 @@
 
 import matplotlib.pyplot as plt
 
-# Creer la fonction qui va afficher le résultat sous forme de graphique avec des paramétres x et y
-def afficher_resultat(x ,y, verdict , force  ):
 
-    # Trace le graphique dont le x est l'axe horizontal et le y l'axe vertical avec une ligne et des points a chaque position du ballon
-    plt.plot(x ,y , color="black")
-    plt.scatter(x ,y , color="green")
-    x_final = x[len(x)-1]
-    y_final = y[len(y)-1]
-    plt.scatter(x_final, y_final , color="blue")
+# Afficher le résultat sous forme de graphique
+def afficher_resultat(x, y, verdict, force):
+    # Création de la figure
+    plt.figure(figsize=(8, 10))
 
-    # On determine le nom des axes horizontales et verticales et aussi le titre du graphique
-    plt.ylabel("La distance vers le but en (m)")
-    plt.xlabel("La distance latéral du ballon en (m)")
-    if verdict == "BUT":
-        plt.title("C'est But !!!!")
-    elif verdict == "Poteau":
-        plt.title("C'est Poteau !!!!")
-    else:
-        plt.title("Le tir n'est pas cadrer ")
+    # Trace la trajectoire (ligne continue)
+    plt.plot(x, y, color="black", label="Trajectoire du ballon", zorder=1)
 
-    # Le ballon peut parcourir une distance entre 0 a 55 m sur l'axe verticale . Car pour qu'un tir soit considérer comme un but il doit pouvoir franchir la ligne blanche qui est de 52,5 m
-    plt.ylim(0 ,55)
-    # Limite horizontale du terrain
-    plt.xlim(-35 ,35)
+    # Affiche les points de position (scatter)
+    # On réduit la taille (s=10) pour que ce soit lisible si beaucoup de points
+    plt.scatter(x, y, color="green", s=10, alpha=0.5, zorder=2)
 
-    # Ajoute une grille au graphique
-    plt.grid()
-    # Ajout de la legende pour differencier la trajectoire du ballon avec sa position
-    plt.legend(["trajectoire du ballon" , "position du ballon "])
-    # Affiche le verdict du tir et des données
-    print("Le verdict du tir = " , verdict )
-    print("La force du tir est de  " , force , "N")
-    # Pour afficher le graphique
+    # Marquer le point de départ et le point final
+    plt.scatter(x[0], y[0], color="red", label="Départ", zorder=3)
+    plt.scatter(x[-1], y[-1], color="blue", label="Arrivée", s=50, zorder=3)
+
+    # Noms des axes
+    plt.ylabel("Distance vers le but (y) en m")
+    plt.xlabel("Distance latérale (x) en m")
+
+    # Titre dynamique selon le verdict
+    titres = {
+        "BUT": "C'EST BUT !!!!",
+        "Poteau": "C'EST LE POTEAU !",
+        "Dehors": "Le tir n'est pas cadré",
+        "Touche le sol": "Le ballon a touché le sol avant le but"
+    }
+    plt.title(f"{titres.get(verdict, 'Résultat du tir')}\nForce : {force} N")
+
+    # Limites du terrain (vue de dessus)
+    plt.ylim(0, 55)
+    plt.xlim(-35, 35)
+
+    # Dessin des limites du but pour référence visuelle
+    plt.hlines(52.5, -3.66, 3.66, colors='red', linestyles='solid', lw=3, label="Ligne de but")
+
+    # Grille et légende
+    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.legend()
+
+    # Affichage console pour débogage
+    print(f"--- Résultat ---")
+    print(f"Verdict : {verdict}")
+    print(f"Force : {force} N")
+    print(f"Position finale : x={round(x[-1], 2)}, y={round(y[-1], 2)}")
+
+    # Affichage du graphique
     plt.show()
