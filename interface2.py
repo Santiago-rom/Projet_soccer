@@ -17,7 +17,7 @@ def afficher_resultat(x, y, verdict, force):
         "BUT": "C'EST BUT !!!!",
         "Poteau": "C'EST LE POTEAU !",
         "Dehors": "Le tir n'est pas cadré",
-        "Dehors (Trop haut)": "Le ballon passe au-dessus du but",
+        "Dehors (Trop haut)": "Le ballon passe au-dessus du but et n'est pas cadré",
         "Touche le sol": "Le ballon a touché le sol avant le but"
     }
 
