@@ -26,8 +26,8 @@ largeur_terrain = 68
 longueur_terrain = 52.5
 
 # dimensions du canvas terrain
-canvas_largeur = 700
-canvas_hauteur = 450
+canvas_largeur = 1100
+canvas_hauteur = 650
 
 
 # clic sur le terrain
