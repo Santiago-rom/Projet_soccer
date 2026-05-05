@@ -244,21 +244,8 @@ entree_force.pack(fill="x", padx=20, pady=8)
 entree_force.insert(0, "1200")
 
 # effet magnus
-texte_effet = tk.Label(
-    frame_droite,
-    text="Effet magnus : E, M ou F",
-    font=("Arial", 11),
-    bg="#2a2a2a",
-    fg="white"
-)
-texte_effet.pack(anchor="w", padx=20, pady=(10, 0))
-
 variable_effet = tk.StringVar()
 variable_effet.set("M")
-
-menu_effet = tk.OptionMenu(frame_droite, variable_effet, "E", "M", "F")
-menu_effet.config(font=("Arial", 11), width=10)
-menu_effet.pack(anchor="w", padx=20, pady=8)
 
 # ballon pour angle vertical
 texte_ballon = tk.Label(
