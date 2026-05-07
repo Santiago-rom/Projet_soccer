@@ -147,6 +147,44 @@ def valider_donnees():
 
     afficher_resultat(liste_x, liste_y, verdict, force_impact)
 
+def afficher_info_force():
+    popup = tk.Toplevel(root)
+    popup.title("")
+    popup.geometry("500x220")
+    popup.config(bg="#2a2a2a")
+    popup.resizable(False, False)
+
+    # placer au milieu de l'écran
+    popup.update_idletasks()
+    x = root.winfo_x() + (root.winfo_width() // 2) - 250
+    y = root.winfo_y() + (root.winfo_height() // 2) - 110
+    popup.geometry(f"500x220+{x}+{y}")
+
+    # bouton X
+    bouton_fermer = tk.Button(
+        popup,
+        text="X",
+        font=("Arial", 12, "bold"),
+        bg="#2a2a2a",
+        fg="white",
+        borderwidth=0,
+        command=popup.destroy
+    )
+    bouton_fermer.pack(anchor="ne", padx=10, pady=5)
+
+    # info sur newton
+    texte_info = tk.Label(
+        popup,
+        text="\n\n Exemple de force d'impact: En 1997, le coup franc de Roberto Carlos à été tiré a 137 Km/h, "
+             "ce qui équivaut a environ 2000 newton.  En comparaison, un joueur amateur génère rarement plus de 600 à 800 N. ",
+        font=("Arial", 14),
+        bg="#2a2a2a",
+        fg="white",
+        justify="center",
+        wraplength = 420
+    )
+    texte_info.pack(expand=True)
+
 # fenêtre principale
 root = tk.Tk()
 root.title("Interface 1 - Projet soccer")
@@ -209,14 +247,14 @@ canvas_terrain.bind("<Button-1>", clic_terrain)
 texte_position = tk.Label(
     frame_gauche,
     text="Position choisie : aucune",
-    font=("Arial", 12),
+    font=("Arial", 16),
     bg="#1f1f1f",
     fg="white"
 )
 texte_position.pack(pady=10)
 
 # partie droite
-frame_droite = tk.Frame(root, bg="#2a2a2a", width=350)
+frame_droite = tk.Frame(root, bg="#2a2a2a", width=420)
 frame_droite.pack(side="right", fill="y", padx=20, pady=20)
 frame_droite.pack_propagate(False)
 
@@ -230,19 +268,46 @@ titre_donnees = tk.Label(
 titre_donnees.pack(pady=20)
 
 # force
+frame_titre_force = tk.Frame(frame_droite, bg="#2a2a2a")
+frame_titre_force.pack(anchor="w", padx=20)
+
 texte_force = tk.Label(
-    frame_droite,
-    text="Force d'impact sur le ballon",
-    font=("Arial", 11),
+    frame_titre_force,
+    text="Force d'impact sur le ballon (Newton)",
+    font=("Arial", 14),
     bg="#2a2a2a",
     fg="white"
 )
-texte_force.pack(anchor="w", padx=20)
+texte_force.pack(side="left")
 
-entree_force = tk.Entry(frame_droite, font=("Arial", 12))
-entree_force.pack(fill="x", padx=20, pady=8)
+bouton_info_force = tk.Button(
+    frame_titre_force,
+    text=" i ",
+    font=("Arial", 10, "bold"),
+    bg="white",
+    fg="black",
+    command=afficher_info_force
+)
+bouton_info_force.pack(side="left", padx=8)
+frame_force = tk.Frame(frame_droite, bg="#2a2a2a")
+frame_force.pack(fill="x", padx=20, pady=8)
+
+entree_force = tk.Entry(
+    frame_force,
+    font=("Arial", 16)
+)
+entree_force.pack(side="left", fill="x", expand=True)
+
+label_N = tk.Label(
+    frame_force,
+    text=" N",
+    font=("Arial", 16, "bold"),
+    bg="#2a2a2a",
+    fg="white"
+)
+label_N.pack(side="right")
+
 entree_force.insert(0, "1200")
-
 # effet magnus
 variable_effet = tk.StringVar()
 variable_effet.set("M")
@@ -259,14 +324,14 @@ texte_ballon.pack(pady=(15, 8))
 
 canvas_ballon = tk.Canvas(
     frame_droite,
-    width=200,
-    height=200,
+    width=260,
+    height=260,
     bg="#2a2a2a",
     highlightthickness=0
 )
 canvas_ballon.pack()
 
-canvas_ballon.create_oval(20, 20, 180, 180, fill="white", outline="black", width=3)
+canvas_ballon.create_oval(30, 30, 230, 230, fill="white", outline="black", width=3)
 canvas_ballon.bind("<Button-1>", clic_ballon)
 
 texte_angle = tk.Label(
@@ -282,9 +347,9 @@ texte_angle.pack(pady=10)
 bouton_valider = tk.Button(
     frame_droite,
     text="Valider les données",
-    font=("Arial", 13, "bold"),
+    font=("Arial", 18, "bold"),
     bg="#4CAF50",
-    fg="white",
+    fg="black",
     command=valider_donnees
 )
 bouton_valider.pack(fill="x", padx=20, pady=15)
@@ -292,8 +357,8 @@ bouton_valider.pack(fill="x", padx=20, pady=15)
 # zone résultat
 zone_resultat = tk.Text(
     frame_droite,
-    width=35,
-    height=8,
+    width=40,
+    height=10,
     font=("Consolas", 10),
     bg="#1f1f1f",
     fg="white",
