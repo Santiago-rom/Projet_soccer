@@ -10,8 +10,8 @@ def afficher_resultat(x, y, verdict, force):
     plt.scatter(x[0], y[0], color="red", label="Départ", zorder=3)
     plt.scatter(x[-1], y[-1], color="blue", label="Arrivée", s=50, zorder=3)
 
-    plt.ylabel("Distance vers le but (y) en m")
-    plt.xlabel("Distance latérale (x) en m")
+    plt.ylabel("Dimension horizontale du terrain (y) en m")
+    plt.xlabel("Dimension latérale du terrain (x) en m")
 
     titres = {
         "BUT": "C'EST BUT !!!!",
